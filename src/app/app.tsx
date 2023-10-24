@@ -17,14 +17,21 @@ export default function App() {
       ) : (
         <div className="space-y-2">
           <div className="p-4">
-            <p>Welcome, {(session as Session)?.user?.name}!</p>
-            <button onClick={() => signOut()}>Logout</button>
+            <Button variant="outline" onClick={() => signOut()}>Sign out</Button>
           </div>
-          <div className="flex flex-col py-2 text-blue-500 hover:underline">
-            <a href="/applet1">Applet 1</a>
+          <div>
+            <a href="/applet1">
+              <div className="bg-slate-200 p-4 text-center rounded-md flex flex-col py-2 text-blue-500 hover:underline">
+                Applet 1
+              </div>
+            </a>
           </div>
-          <div className="flex flex-col py-2 text-blue-500 hover:underline">
-            <a href="/applet2">Applet 2</a>
+          <div>
+            <a href="/applet2">
+              <div className="bg-slate-200 p-4 text-center rounded-md flex flex-col py-2 text-blue-500 hover:underline">
+                Applet 2
+              </div>
+            </a>
           </div>
         </div>
       )}
