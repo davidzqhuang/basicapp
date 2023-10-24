@@ -1,6 +1,11 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+This is a template application for developing and publishing a set of applets.
 
-## Getting Started
+Features:
+- Bare bones
+- Password protected
+- Simple styling
+
+This is based on the boilerplate `create-next-app`.
 
 First, run the development server:
 
