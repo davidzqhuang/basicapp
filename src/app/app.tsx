@@ -20,9 +20,9 @@ export default function App() {
             <Button variant="outline" onClick={() => signOut()}>Sign out</Button>
           </div>
           <div>
-            <a href="/applet1">
+            <a href="/calculator">
               <div className="bg-slate-200 p-4 text-center rounded-md flex flex-col py-2 text-blue-500 hover:underline">
-                Applet 1
+                Calculator
               </div>
             </a>
           </div>
