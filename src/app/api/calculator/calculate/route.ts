@@ -1,4 +1,8 @@
+import { log_request } from "@/lib/apiUtils";
+
 export async function POST(request: Request) {
+    log_request(request.clone());
+
     const { value1, value2, operator } = await request.json()
     value1 as number;
     value2 as number;

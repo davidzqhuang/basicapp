@@ -101,6 +101,16 @@ export default function Page() {
                             <p>
                                 {`${value1} ${operator} ${value2} = ${result}`}
                             </p>
+                            <Button onClick={() => {
+                                setStatus(Statuses.Enter)
+                                setValue1(null)
+                                setValue2(null)
+                                setOperator(null)
+                                setResult(null)
+                            }
+                            }>
+                                Reset
+                            </Button>
                         </>
                     ) : null
                 }
