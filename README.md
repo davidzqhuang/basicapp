@@ -19,6 +19,6 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.AA
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 You can start making apps by modifying `src/app/[calculator, applet2]/page.tsx`
