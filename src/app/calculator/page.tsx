@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from 'react'
 
+import { useSession, signIn, signOut } from 'next-auth/react'
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -14,6 +16,8 @@ enum Statuses {
 }
 
 export default function Page() {
+    const { data: session } = useSession()
+
     const [status, setStatus] = useState<Statuses>(Statuses.Enter)
     const [value1, setValue1] = useState<number | null>(null)
     const [value2, setValue2] = useState<number | null>(null)
@@ -55,12 +59,18 @@ export default function Page() {
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
-            <div className="z-10 max-w-8xl w-full items-center justify-between font-mono text-sm lg:flex flex-col space-y-4">
-                <a href="/">
-                    <Button variant="outline">Back to App Tree</Button>
-                </a>
-                <h1 className="text-2xl mb-4">Calculator</h1>
 
+            {!session ? (
+                <div className="text-center space-y-2">
+                    <a href="/">
+                        <Button variant="outline">Back to App Tree</Button>
+                    </a>
+                    <p>The calculator app is password protected, please Sign In to continue.</p>
+                    <Button onClick={() => signIn()} variant="outline">Sign in with Password</Button>
+                </div>
+            ) : (<div className="z-10 max-w-8xl w-full items-center justify-between font-mono text-sm lg:flex flex-col space-y-4">
+
+                <h1 className="text-2xl mb-4">Calculator</h1>
                 {status === Statuses.Enter || status === Statuses.Valid ? (
                     <div className="flex flex-col space-y-4">
                         <Label htmlFor="Value1">Value 1</Label>
@@ -114,7 +124,8 @@ export default function Page() {
                         </>
                     ) : null
                 }
-            </div>
+            </div>)
+            }
         </main>
     )
 }
