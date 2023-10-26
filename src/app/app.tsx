@@ -33,6 +33,17 @@ export default function App() {
               </div>
             </a>
           </div>
+          {
+            process.env.NODE_ENV === 'development' ? (
+              <div>
+                <a href="/dev/api">
+                  <div className="bg-orange-200 p-4 text-center rounded-md flex flex-col py-2 text-blue-500 hover:underline">
+                    API Testing
+                  </div>
+                </a>
+              </div>
+            ) : null
+          }
         </div>
       )}
     </div>

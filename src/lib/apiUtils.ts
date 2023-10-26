@@ -1,15 +1,12 @@
 import fs from 'fs';
 import path from 'path';
-console.log("My dirname is ", __dirname)
-const logDirectoryPath = path.join(__dirname.split(".next")[0], "logs");
-console.log("My log directory path is", logDirectoryPath)
-const logFilePath = path.join(logDirectoryPath, 'api_logs.jsonl');
+
+const logDirectoryPath = path.join(__dirname.split(".next")[0], "src", "logs");
+const logFilePath = path.join(logDirectoryPath, 'api_logs.json');
 
 export async function log_request(request: Request) {
-    console.log("In log_request", request)
     if (process.env.NODE_ENV === "development") {
         const body = await request.text();
-
         const logEntry = {
             timestamp: Date.now().toString(),
             request: {
@@ -18,18 +15,23 @@ export async function log_request(request: Request) {
                 body: body,
                 headers: Object.fromEntries(request.headers.entries()),
             }
-        }
+        };
 
         if (!fs.existsSync(logDirectoryPath)) {
             fs.mkdirSync(logDirectoryPath, { recursive: true });
         }
 
-        console.log("In log_request, writing", logEntry)
-        fs.appendFileSync(logFilePath, JSON.stringify(logEntry) + '\n');
-        console.log("Wrote log entry to", logFilePath)
-        return;
+        let logData;
+        if (fs.existsSync(logFilePath)) {
+            const fileContent = fs.readFileSync(logFilePath, 'utf8');
+            logData = JSON.parse(fileContent);
+        } else {
+            logData = { entries: [] };
+        }
 
-    } else {
-        return;
+        logData.entries.push(logEntry);
+        fs.writeFileSync(logFilePath, JSON.stringify(logData, null, 2));
+
+        console.log("Logged request to", logFilePath);
     }
 }
